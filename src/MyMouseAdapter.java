@@ -284,28 +284,12 @@ public class MyMouseAdapter extends MouseAdapter {
 				//Do nothing
 
 			} else {
-				if ((gridX == -1) || (gridY == -1)) {
-					//Is releasing outside
-					for(int i=1;i<10;i++){
-						for (int j=1;j<10;j++){			
-							Color newColor = null;				
-							switch (generator.nextInt(3)) {
-							case 0:																									
-								newColor = Color.CYAN;
-								break;															
-							case 1:								
-								newColor = Color.ORANGE;
-								break;
-							case 2:
-								newColor = Color.GREEN;
-								break;
-
-							}
-							myPanel.colorArray[i][j]= newColor;
-							myPanel.repaint();	
+				if ((gridX >= 0) || (gridY >= 0)) { //Right Click is releasing inside 
+					        Color newColor = null;																												
+						    newColor = Color.red;
+							myPanel.colorArray[gridX][gridY] = newColor;
+							myPanel.repaint();
 						}
-					}
-				}
 			
 				}
 			
