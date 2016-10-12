@@ -6,6 +6,11 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
+	
+	public Color mine= Color.BLACK;
+	public int[][]panelValue= new int [TOTAL_COLUMNS][TOTAL_ROWS];
+	Random generator = new Random();
+	
 	private static final long serialVersionUID = 3426940946811133635L;
 	private static final int GRID_X = 100;
 	private static final int GRID_Y = 75;
@@ -30,10 +35,12 @@ public class MyPanel extends JPanel {
 	
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //The rest of the grid
 			for (int y = 0; y < TOTAL_ROWS; y++) {
-				colorArray[x][y] = Color.WHITE;
+				colorArray[x][y] = Color.GRAY;
 			}
 		}
 	}
+	
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -122,4 +129,9 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
+//	public void BlackMines{
+//		for (int i=0; i<8;i++){
+//			int mineColumn=
+//		}
+//	}
 }
