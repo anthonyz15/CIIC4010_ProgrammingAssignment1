@@ -63,6 +63,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
+
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
 				//Had pressed outside
 				//Do nothing
@@ -87,7 +88,11 @@ public class MyMouseAdapter extends MouseAdapter {
 						myPanel.repaint();
 					}
 
-					else {					
+					else {	
+						if (myPanel.panelValue[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) {
+							myPanel.showMineLocations();
+							System.out.println("mina");
+						}
 							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
 							myPanel.repaint();
 						

@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
 	
-	public Color mine= Color.BLACK;
+	public Color mine;
 	public int[][]panelValue= new int [TOTAL_COLUMNS][TOTAL_ROWS];
 	Random generator = new Random();
 	
@@ -37,6 +37,18 @@ public class MyPanel extends JPanel {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.GRAY;
 			}
+			
+			//generate mine spaces
+			
+			
+			
+			
+		}
+		for(int i = 0; i < 10; i++){
+			int mineColumn = generator.nextInt(TOTAL_COLUMNS);
+		    int mineRow = generator.nextInt(TOTAL_ROWS-1);
+			mine = colorArray[mineColumn][mineRow];
+			panelValue[mineColumn][mineRow] = 1;
 		}
 	}
 	
@@ -129,9 +141,20 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
-//	public void BlackMines{
-//		for (int i=0; i<8;i++){
-//			int mineColumn=
-//		}
+	
+//	public void setMineLocations(){
+//		
+//		
 //	}
+	
+	public void showMineLocations(){
+		for(int i = 0; i < TOTAL_COLUMNS; i++){
+			for(int j = 0; j < TOTAL_ROWS-1; j++){
+				if(panelValue[i][j] == 1){
+					colorArray[i][j] = Color.BLACK;
+				}
+			}
+		}
+	}
+
 }
