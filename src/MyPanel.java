@@ -38,20 +38,49 @@ public class MyPanel extends JPanel {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.GRAY;
 			}
-			
-			//generate mine spaces
-			
-			
-			
-			
 		}
-		for(int i = 0; i < 10; i++){
-			int mineColumn = generator.nextInt(TOTAL_COLUMNS);
-		    int mineRow = generator.nextInt(TOTAL_ROWS-1);
-			mine = colorArray[mineColumn][mineRow];
-			panelValue[mineColumn][mineRow] = 1;
+	        
+		int[] mineX = new int[20];
+		int[] mineY= new int[20];
+		
+		for(int i = 9; i >= 0; i--){  //generate mine spaces
+			mineX[i] = generator.nextInt(9);
+			mineY[i] = generator.nextInt(9);
+			if(i==9){
+				mine = colorArray[mineX[i]][mineY[i]];
+				panelValue[mineX[i]][mineY[i]] = 1;
+			}
+			else{
+				if((mineX[i]==mineX[i+1] && mineY[i]==mineY[i+1])||(mineX[i]==mineX[i+2] && mineY[i]==mineY[i+2])||(mineX[i]==mineX[i+3] && mineY[i]==mineY[i+3])||(mineX[i]==mineX[i+4] && mineY[i]==mineY[i+4])||(mineX[i]==mineX[i+5] && mineY[i]==mineY[i+5])||(mineX[i]==mineX[i+7] && mineY[i]==mineY[i+7])||(mineX[i]==mineX[i+8] && mineY[i]==mineY[i+8])||(mineX[i]==mineX[i+9] && mineY[i]==mineY[i+9]))
+				{
+					mineX[19]=mineX[i];
+					mineX[i] = generator.nextInt(9);
+					mineY[i] = generator.nextInt(9);
+					if(mineX[i]==mineX[19]){
+						mineX[i] = generator.nextInt(9);
+						mineY[i] = generator.nextInt(9);
+						mine = colorArray[mineX[i]][mineY[i]];
+						panelValue[mineX[i]][mineY[i]] = 1;
+					}
+					else{
+
+						mine = colorArray[mineX[i]][mineY[i]];
+						panelValue[mineX[i]][mineY[i]] = 1;
+					}
+				}
+				else{
+
+					mine = colorArray[mineX[i]][mineY[i]];
+					panelValue[mineX[i]][mineY[i]] = 1;
+				}
+			}
 		}
-	}
+		
+		
+		
+	}//generate mine spaces
+		
+	
 	
 	
 	public void paintComponent(Graphics g) {
