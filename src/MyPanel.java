@@ -78,7 +78,7 @@ public class MyPanel extends JPanel {
 		
 		
 		
-	}//generate mine spaces
+	}
 		
 	
 	
@@ -96,7 +96,7 @@ public class MyPanel extends JPanel {
 		int height = y2 - y1;
 
 		//Paint the background
-		g.setColor(Color.gray);
+		g.setColor(Color.darkgray);
 		g.fillRect(x1, y1, width + 1, height + 1);
 
 		//Draw the grid minus the bottom row (which has only one cell)
@@ -131,19 +131,19 @@ public class MyPanel extends JPanel {
 					for (int i = x-1; i <= x+1; i++){
 						for (int j = y-1; j <= y+1; j++){
 							if ( i < 0 || i > TOTAL_COLUMNS-1 || j < 0 || j >TOTAL_ROWS-1){
-								//Do nothing
+								//null
 							} else if (panelValue[i][j] == 1){
 								mineCount++;
 							}
 						}
 					}
 					
-					//Determinate the coordinates for numbers placed inside cells
+					//Determinate the location for numbers inside Square
 					xCoords = x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12;
 					yCoords =  y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20;
 					g.setColor(Color.WHITE);
 					
-					//Switch Case to know which number print based on mine counts
+					//Switch Case to know which number on adjacent mines
 					
 					switch (mineCount) {
 					case 1:
