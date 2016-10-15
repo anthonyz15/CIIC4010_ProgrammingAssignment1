@@ -120,7 +120,38 @@ public class MyPanel extends JPanel {
 				
 			}
 		}
+		
+		int xCoords;
+		int yCoords;
+		int mineCount;
+		for (int x = 0; x < TOTAL_COLUMNS; x++){
+			for (int y = 0; y < TOTAL_ROWS-1; y++){
+				mineCount = 0;
+				if (panelValue[x][y] != 1){
+					for (int i = x-1; i <= x+1; i++){
+						for (int j = y-1; j <= y+1; j++){
+							if ( i < 0 || i > TOTAL_COLUMNS-1 || j < 0 || j >TOTAL_ROWS-1){
+								//Do nothing
+							} else if (panelValue[i][j] == 1){
+								mineCount++;
+							}
+						}
+					}
+					
+					//Determinate the coordinates for numbers placed inside cells
+					xCoords = x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12;
+					yCoords =  y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20;
+					g.setColor(Color.WHITE);
+					
+				}
+			}
+		}
 	}
+		
+	
+	
+	
+	
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
@@ -172,10 +203,7 @@ public class MyPanel extends JPanel {
 		return y;
 	}
 	
-//	public void setMineLocations(){
-//		
-//		
-//	}
+
 	
 	public void showMineLocations(){
 		for(int i = 0; i < TOTAL_COLUMNS; i++){
@@ -186,5 +214,6 @@ public class MyPanel extends JPanel {
 			}
 		}
 	}
+	
 
 }
