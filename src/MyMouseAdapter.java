@@ -100,6 +100,7 @@ public class MyMouseAdapter extends MouseAdapter {
 							myPanel.lost = true;
 							myPanel.repaint();
 							JOptionPane.showMessageDialog(myFrame, "Game over! Your score is: " + spaceCounter);
+							System.exit(0);
 						}
 							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.gray;
 							myPanel.repaint();
