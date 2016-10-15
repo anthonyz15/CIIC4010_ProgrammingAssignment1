@@ -143,6 +143,33 @@ public class MyPanel extends JPanel {
 					yCoords =  y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20;
 					g.setColor(Color.WHITE);
 					
+					//Switch Case to know which number print based on mine counts
+					
+					switch (mineCount) {
+					case 1:
+						g.drawString("1", xCoords, yCoords);
+						break;
+					case 2:
+						g.drawString("2", xCoords, yCoords);
+						break;
+					case 3:
+						g.drawString("3", xCoords, yCoords);
+						break;
+					case 4:
+						g.drawString("4",xCoords, yCoords);
+						break;
+					case 5:
+						g.drawString("5",xCoords, yCoords);
+						break;
+					case 6:
+						g.drawString("6", xCoords, yCoords);
+						break;
+					case 7:
+						g.drawString("7", xCoords, yCoords);
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}
