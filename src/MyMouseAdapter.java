@@ -97,19 +97,23 @@ public class MyMouseAdapter extends MouseAdapter {
 						if (myPanel.panelValue[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) {
 							myPanel.showMineLocations();
 							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.BLACK;
-							myPanel.lost = true;
+							
 							myPanel.repaint();
-							JOptionPane.showMessageDialog(myFrame, "Game over! Your score is: " + spaceCounter);
+							JOptionPane.showMessageDialog(myFrame, "Game over!");
 							System.exit(0);
 						}
-							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.gray;
+						if(myPanel.hasNearbyMines(myPanel.mouseDownGridX, myPanel.mouseDownGridY)){
+							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.LIGHT_GRAY;
 							myPanel.repaint();
+					}
+					else{ //Cell is not a mine, has 0 adjacent mines, is not a flag and is white
+						myPanel.noNearbyMines(myPanel.mouseDownGridX, myPanel.mouseDownGridY);
+					}
+				
 						
 					}
 				}
 			}
-			spaceCounter++;
-			System.out.println(spaceCounter);
 			myPanel.repaint();
 			break;
 		case 3:		//Right mouse button

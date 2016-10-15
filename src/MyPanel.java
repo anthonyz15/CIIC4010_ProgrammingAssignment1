@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 public class MyPanel extends JPanel {
 	
 	public Color mine;
+	public int isMine = 1; //assigns 1 to a cell that is mine 
 	public int[][]panelValue= new int [TOTAL_COLUMNS][TOTAL_ROWS];
 	Random generator = new Random();
 	
@@ -21,8 +22,8 @@ public class MyPanel extends JPanel {
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
-	public boolean lost=false;
+	public  Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
+
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
 			throw new RuntimeException("INNER_CELL_SIZE must be positive!");
@@ -78,7 +79,7 @@ public class MyPanel extends JPanel {
 		
 		
 		
-	}
+	}//generate mine spaces
 		
 	
 	
@@ -96,7 +97,7 @@ public class MyPanel extends JPanel {
 		int height = y2 - y1;
 
 		//Paint the background
-		g.setColor(Color.darkgray);
+		g.setColor(Color.gray);
 		g.fillRect(x1, y1, width + 1, height + 1);
 
 		//Draw the grid minus the bottom row (which has only one cell)
@@ -131,19 +132,19 @@ public class MyPanel extends JPanel {
 					for (int i = x-1; i <= x+1; i++){
 						for (int j = y-1; j <= y+1; j++){
 							if ( i < 0 || i > TOTAL_COLUMNS-1 || j < 0 || j >TOTAL_ROWS-1){
-								//null
+								//Do nothing
 							} else if (panelValue[i][j] == 1){
 								mineCount++;
 							}
 						}
 					}
 					
-					//Determinate the location for numbers inside Square
+					//Determinate the coordinates for numbers placed inside cells
 					xCoords = x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12;
 					yCoords =  y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20;
 					g.setColor(Color.WHITE);
 					
-					//Switch Case to know which number on adjacent mines
+					//Switch Case to know which number print based on mine counts
 					
 					switch (mineCount) {
 					case 1:
@@ -174,9 +175,6 @@ public class MyPanel extends JPanel {
 			}
 		}
 	}
-		
-	
-	
 	
 	
 	public int getGridX(int x, int y) {
@@ -230,7 +228,40 @@ public class MyPanel extends JPanel {
 		return y;
 	}
 	
+	public  int adjacentMinesFinder(int x, int y) {		
+		int adjacentMines = 0;
+		for(int i = x-1; i <= x+1; i++) {
+			for(int j = y-1; j <= y+1; j++) {
+				if(i >=0 && i<TOTAL_COLUMNS && j>=0 && j <TOTAL_ROWS && panelValue[i][j]==isMine) {
+					adjacentMines++;
+				}
+			}
+		}
+		return adjacentMines;
+	}
+	
+	public boolean hasNearbyMines(int x, int y) {
+		return adjacentMinesFinder(x,y)>0;
+	}
+	
+	public void noNearbyMines(int x, int y){
+		if(!hasNearbyMines(x,y)){
+			for(int i=x-1; i<=x+1; i++){
+				for (int j=y-1; j<=y+1; j++){
+					if( !(i<0 || i>=TOTAL_COLUMNS || j<0 || j>=TOTAL_ROWS) &&
+							colorArray[i][j]==Color.WHITE){
+						colorArray[i][j]=Color.LIGHT_GRAY;
+						noNearbyMines(i,j);
+					}
+				}
+			}
+		}
+	}
 
+	public static int getColumns(){
+		return TOTAL_COLUMNS;
+	}
+	
 	
 	public void showMineLocations(){
 		for(int i = 0; i < TOTAL_COLUMNS; i++){
